@@ -1,31 +1,31 @@
-﻿using System; // przestrzen nazw
+﻿using System; // przestrzeń nazw
 namespace FizzBuzzApp
 {
-    class Program
+    class Program // klasa główna programu
     {
         static void Main(string[] args)
         {
             Console.Write("Podaj górny zakres liczb: ");
             int zakres = Convert.ToInt32(Console.ReadLine());
 
-            FizzBuzz fizzBuzz = new FizzBuzz(zakres);
+            FizzBuzz fizzBuzz = new(zakres);
             fizzBuzz.Wyswietl();
 
             Console.ReadLine();
         }
     }
-    class FizzBuzz
+    class FizzBuzz // klasa odpowiedzialna za logikę FizzBuzz
     {
-        private int zakresFB;
+        private int zakresFB; // pole przechowujące górny zakres liczb
         public FizzBuzz(int zakres)
         {
             zakresFB = zakres;
         }
-        public void Wyswietl()
+        public void Wyswietl() // metoda wyświetlająca wyniki FizzBuzz
         {
             for (int i = 1; i <= zakresFB; i++)
             {
-                if (i % 3 == 0 && i % 5 == 0)
+                if (i % 3 == 0 && i % 5 == 0) 
                 {
                     Console.WriteLine("FizzBuzz");
                 }
