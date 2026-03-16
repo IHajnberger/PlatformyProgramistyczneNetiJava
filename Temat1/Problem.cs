@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
+[assembly: InternalsVisibleTo("test")]
 
 namespace Temat1
 {
-    public class Problem
+    internal class Problem
     {
         public int IloscPrzedmiotow { get; set; }
         public List<Przedmiot> Przedmioty { get; set; }
