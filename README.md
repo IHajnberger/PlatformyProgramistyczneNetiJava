@@ -7,6 +7,7 @@ Wprowadzenie do programowania obiektowego w języku C# poprzez zaimplementowanie
 
 ## Temat 1 - 11-18.03.2026
 <details>
+  
 __Zadanie 1:__
 
 Implementacja problemu plecakowego z użyciem algorytmu zachłannego w języku C#.
