@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -100,22 +100,30 @@ public class WeatherService
             Console.WriteLine($"{w.City.Name} | {w.Temperature}°C");
         }
     }
-    public void Delete(int id)
+    public void DeleteByCity(string cityName)
     {
         using var db = new AppDbContext();
 
-        var weather = db.Weathers.FirstOrDefault(w => w.Id == id);
+        var city = db.Cities.FirstOrDefault(c => c.Name == cityName);
 
-        if (weather != null)
+        if (city == null)
         {
-            db.Weathers.Remove(weather);
-            db.SaveChanges();
-            Console.WriteLine("Usunięto!");
+            Console.WriteLine("Nie znaleziono miasta");
+            return;
         }
-        else
+
+        var weathers = db.Weathers.Where(w => w.CityId == city.Id).ToList();
+
+        if (weathers.Count == 0)
         {
-            Console.WriteLine("Nie znaleziono rekordu");
+            Console.WriteLine("Brak danych pogodowych dla tego miasta");
+            return;
         }
+
+        db.Weathers.RemoveRange(weathers);
+        db.SaveChanges();
+
+        Console.WriteLine($"Usunięto rekord dla miasta {cityName}");
     }
 }
 
