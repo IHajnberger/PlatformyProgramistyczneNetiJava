@@ -18,5 +18,5 @@ public class Weather
 
     public int CityId { get; set; }
 
-    public required City City { get; set; }
+    public City City { get; set; }
 }
