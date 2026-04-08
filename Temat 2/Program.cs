@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 class Program
 {
@@ -42,9 +42,9 @@ class Program
                     break;
 
                 case "5":
-                    Console.Write("Podaj ID do usunięcia: ");
-                    int id = int.Parse(Console.ReadLine());
-                    service.Delete(id);
+                    Console.Write("Podaj miasto do usunięcia: ");
+                    string cityy = Console.ReadLine();
+                    service.DeleteByCity(cityy);
                     break;
 
                 case "0":
