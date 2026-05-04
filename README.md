@@ -37,5 +37,55 @@ Dodanie GUI zaprojektowanego przy użyciu Windows Forms App, pozwala użytkownik
 
 ## Temat 2 - 25.03.2026
 <details>
-  TBA
+Projekt aplikacji bazodanowej .NET
+
+__Struktura plików:__
+- Program.cs - główny plik aplikacji zawierający metodę Main, odpowiada za interakcję z użytkownikiem (menu w konsoli) oraz wywoływanie metod z warstwy serwisowej.
+- Models:
+  - City.cs - model reprezentujący miasto w bazie danych. Zawiera nazwę miasta oraz relację do powiązanych danych pogodowych (1:N).
+  - Weather.cs - model reprezentujący dane pogodowe przechowywane w bazie. Zawiera podstawowe informacje (temperatura, wilgotność, wiatr, data) oraz klucz obcy do miasta.
+- Data:
+  - AppDB.cs - klasa kontekstu bazy danych, odpowiada za konfigurację połączenia z bazą SQLite oraz zarządzanie tabelami (City, Weather).
+- API
+  - APIService.cs - klasa odpowiedzialna za komunikację z zewnętrznym API pogodowym. Wysyła zapytania HTTP i pobiera dane w formacie JSON.
+  - WeatherResponse.cs - model używany do deserializacji odpowiedzi z API. Odwzorowuje strukturę JSON zwracaną przez serwis pogodowy.
+  - WeatherService.cs - warstwa logiki aplikacji. Łączy API z bazą danych — odpowiada za pobieranie danych, ich zapisywanie, odczyt oraz operacje takie jak filtrowanie, sortowanie i usuwanie.
+
+__Logika programu:__
+<img width="340" height="170" alt="image" src="https://github.com/user-attachments/assets/5b5400d0-e223-433a-bc02-cbe37f71fc0c" />
+1. Pobranie pogody:
+<img width="295" height="102" alt="image" src="https://github.com/user-attachments/assets/08810595-e076-471a-918b-1c6ab33ea5f4" />
+2. Wyświetlenie wszystkich pobranych danych:
+<img width="674" height="154" alt="image" src="https://github.com/user-attachments/assets/069b7d9e-7c4c-489e-b5a3-b4efdf4c8a48" />
+3. Filtrowanie danych po temperaturze:
+<img width="667" height="468" alt="image" src="https://github.com/user-attachments/assets/7c1778af-2fec-42f7-a75a-f60da13d23b7" />
+4. Sortowanie po temperaturze:
+<img width="344" height="152" alt="image" src="https://github.com/user-attachments/assets/c57da2d8-008b-41d3-9c01-9556793f1c41" />
+5. Usuwanie danych z bazy:
+<img width="716" height="389" alt="image" src="https://github.com/user-attachments/assets/f89193b8-1468-4997-ba95-c6177f63a634" />
+
+
+</details>
+
+
+## Temat 3 - 22.04.2026
+<details>
+Obliczenia wielowątkowe w technologii.NET
+
+Zadanie polegało na wykonaniu aplikacji pozwalającej na porównanie wydajności obliczeń sekwencyjnych oraz równoległych na przykładzie mnożenia macierzy. Zaimplementowano dwa podejścia do wielowątkowości:
+- wysokopoziomowe (biblioteka Parallel)
+- niskopoziomowe (klasa Thread)
+
+__Struktura plików:__
+- Matrix.cs - klasa przechowująca macierz 
+- MatrixMulti.cs - klasa odpowiedzialna za mnożenie macierzy z użyciem biblioteki Parallel
+- MatrixMThreads.cs - klasa realizująca mnożenie macierzy z użyciem klasy Thread, podział pracy oraz synchronizacja wątków realizowane są ręcznie, co pozwala na większą kontrolę, ale zwiększa złożoność kodu.
+- Program.cs - główna część programu odpowiedzialna za generowanie macierzy, mierzenie czasu i wyświetlenie wyników. Dane końcowe stanowią uśrednioną wartość z 6 prób.
+
+__Wyniki:__
+<img width="1047" height="626" alt="image" src="https://github.com/user-attachments/assets/8e91d19b-e007-487d-9151-dd134c566b30" />
+<img width="1035" height="620" alt="image" src="https://github.com/user-attachments/assets/64f85587-1bdb-4adb-a896-5f62dd0fe0cc" />
+Implementacja z użyciem Thread daje większą kontrolę nad podziałem pracy, w niektórych przypadkach osiąga porównywalne lub lepsze wyniki niż Parallel. Wynika to z mniejszego narzutu zarządzania wątkami, biblioteka Parallel wprowadza dodatkowe mechanizmy optymalizacyjne, które nie zawsze są korzyste dla prostych obliczeń. 
+
+
 </details>
