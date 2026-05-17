@@ -1,0 +1,118 @@
+﻿@page "/weather"
+@attribute [StreamRendering]
+@rendermode InteractiveServer
+
+<PageTitle>Pogoda</PageTitle>
+
+<h1>Pogoda</h1>
+<h3>Prognoza pogody (10 dni)</h3>
+
+<input class="form-control mb-3"
+       placeholder="Szukaj po opisie..."
+       @oninput="Input" />
+
+@if (forecasts == null)
+{
+    <p><em>Ładowanie...</em></p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Temperatura (°C)</th>
+                <th>Opis</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in filteredForecasts!)
+            {
+                <tr>
+                    <td>@item.Date.ToShortDateString()</td>
+                    <td>@item.TemperatureC</td>
+                    <td>@item.Summary</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<p><strong>Liczba ciepłych dni ( > 15°C ):</strong> @warmDays</p>
+
+<div class="mt-3">
+    <button class="btn btn-primary me-2" @onclick="WarmDaysFilter">
+        Ciepłe dni
+    </button>
+
+    <button class="btn btn-secondary" @onclick="Restore">
+        Przywróć
+    </button>
+</div>
+
+@code {
+    private WeatherForecast[]? forecasts;
+    private WeatherForecast[]? filteredForecasts;
+    private int warmDays;
+
+    protected override Task OnInitializedAsync()
+    {
+        var startDate = DateOnly.FromDateTime(DateTime.Now);
+
+        // pogoda x 10
+        forecasts = Enumerable.Range(1, 10).Select(index => new WeatherForecast
+        {
+            Date = startDate.AddDays(index),
+            TemperatureC = Random.Shared.Next(-20, 55),
+            Summary = Summaries[Random.Shared.Next(Summaries.Length)]
+        }).ToArray();
+
+        // liczenie ciepłych dni
+        warmDays = forecasts.Count(f => f.TemperatureC > 15);
+
+        // stan początkowy
+        filteredForecasts = forecasts;
+
+        return Task.CompletedTask;
+    }
+    // filotrowanie po ciepłych dniach
+    private Task WarmDaysFilter()
+    {
+        filteredForecasts = forecasts!
+            .Where(f => f.TemperatureC > 15)
+            .ToArray();
+
+        return Task.CompletedTask;
+    }
+    // przywrócenie stanu początkowego 
+    private Task Restore()
+    {
+        filteredForecasts = forecasts;
+        return Task.CompletedTask;
+    }
+    // wyszukiwanie
+    private Task Input(ChangeEventArgs e)
+    {
+        var text = e.Value?.ToString() ?? "";
+
+        filteredForecasts = forecasts!
+            .Where(f => f.Summary != null &&
+                        f.Summary.Contains(text, StringComparison.OrdinalIgnoreCase))
+            .ToArray();
+
+        return Task.CompletedTask;
+    }
+
+    private string[] Summaries =
+    [
+        "Freezing", "Bracing", "Chilly", "Cool", "Mild",
+        "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+    ];
+
+    private class WeatherForecast
+    {
+        public DateOnly Date { get; set; }
+        public int TemperatureC { get; set; }
+        public string? Summary { get; set; }
+    }
+}
