@@ -87,5 +87,34 @@ __Wyniki:__
 <img width="1035" height="620" alt="image" src="https://github.com/user-attachments/assets/64f85587-1bdb-4adb-a896-5f62dd0fe0cc" />
 Implementacja z użyciem Thread daje większą kontrolę nad podziałem pracy, w niektórych przypadkach osiąga porównywalne lub lepsze wyniki niż Parallel. Wynika to z mniejszego narzutu zarządzania wątkami, biblioteka Parallel wprowadza dodatkowe mechanizmy optymalizacyjne, które nie zawsze są korzyste dla prostych obliczeń. 
 
+</details>
 
+## Temat 4 - 13.05.2026
+
+<details>
+  
+Celem laboratorium jest zapoznanie się z podstawami projektowania i implementacji aplikacji webowych w technologii ASP.NET Core. 
+
+__Zadanie 1:__
+
+Rozszerzenie domyślnego komponentu pogodowego w aplikacji Blazor Web App.
+Dodano prognozę na 10 dni, zliczanie ciepłych dni (>15°C), filtrowanie danych przy użyciu LINQ oraz wyszukiwanie po nazwie/opisie pogody.
+
+Zastosowano interaktywność Blazora (InteractiveServer) oraz obsługę zdarzeń przycisków i pola tekstowego.
+
+Najważniejsze pliki:
+- Components/Pages/Weather.razor - główny komponent strony pogodowej,
+- Components/Layout/NavMenu.razor - dodanie linku do strony Weather w menu bocznym.
+
+__Zadanie 2:__
+
+Utworzenie podstrony wykorzystującej wytrenowany model ML.NET do klasyfikacji sentymentu tekstu.
+
+Aplikacja pozwala użytkownikowi wprowadzić tekst, uruchomić analizę oraz wyświetlić przewidywaną etykietę i pewność klasyfikacji.
+
+Najważniejsze pliki:
+- Components/Pages/Analiza.razor - interfejs użytkownika dla analizy sentymentu,
+- Components/Layout/NavMenu.razor - dodanie linku do podstrony analizy sentymentu,
+- Components/Layout/NavMenu.razor.css - konfiguracja ikony w menu bocznym aplikacji,
+- Model.consumption.cs - automatycznie wygenerowany plik ML.NET, zawiera definicje klas ModelInput i ModelOutput.
 </details>
