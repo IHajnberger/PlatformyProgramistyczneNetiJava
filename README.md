@@ -118,3 +118,10 @@ Najważniejsze pliki:
 - Components/Layout/NavMenu.razor.css - konfiguracja ikony w menu bocznym aplikacji,
 - Model.consumption.cs - automatycznie wygenerowany plik ML.NET, zawiera definicje klas ModelInput i ModelOutput.
 </details>
+
+## JAVA:
+
+<details>
+  link do repozytorium od Javy:
+  https://github.com/IHajnberger/PlatformyProgramistyczneNetiJava_Java
+</details>
